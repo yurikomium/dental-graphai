@@ -1,0 +1,29 @@
+version: 0.5
+nodes:
+  # 1. jsonファイルを読み込む
+  fileReader:
+    agent: fileReadAgent
+    inputs:
+      array:
+        - "./dentist.json"
+    params:
+      outputType: "text"
+      baseDir: "."
+  # 2. jsonファイルをパースする
+  jsonParser:
+    agent: jsonParserAgent
+    inputs:
+      text: ":fileReader.array.$0"
+  # 3. パースされたJSONから"clinic"の値を取り出す
+  extractClinic:
+    agent: mapAgent
+    inputs:
+      rows: ":jsonParser"
+    isResult: true
+    graph:
+      nodes:
+        getClinic:
+          agent: copyAgent
+          inputs:
+            text: ":row.clinic"
+          isResult: true
