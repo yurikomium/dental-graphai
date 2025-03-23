@@ -1,5 +1,6 @@
 version: 0.5
 nodes:
+  # 1. jsonファイルを読み込む
   fileReader:
     agent: fileReadAgent
     inputs:
@@ -8,6 +9,7 @@ nodes:
     params:
       outputType: "text"
       baseDir: "."
+  # 2. jsonファイルをパースする
   jsonParser:
     agent: jsonParserAgent
     inputs:
