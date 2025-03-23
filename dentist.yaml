@@ -1,0 +1,15 @@
+version: 0.5
+nodes:
+  fileReader:
+    agent: fileReadAgent
+    inputs:
+      array:
+        - "./dentist.json"
+    params:
+      outputType: "text"
+      baseDir: "."
+  jsonParser:
+    agent: jsonParserAgent
+    inputs:
+      text: ":fileReader.array.$0"
+    isResult: true
